@@ -1,0 +1,17 @@
+.login-container {
+    /* You can adjust the background size, position, and other properties as needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* Additional styles for the container */
+    width: 100%; /* Ensures the container covers the entire width */
+    height: 100vh; /* Sets the container height to fill the viewport */
+    /* Add other styles as needed */
+  }
+
+.admin-bg {
+    background-image: url('../../Assets/Background/Background2.svg');
+}
+
+.staff-bg {
+    background-image: url('../../Assets/Background/Background1.svg');
+}

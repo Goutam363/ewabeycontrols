@@ -1,0 +1,4 @@
+.signup-container {
+    width: 100%; /* Ensures the container covers the entire width */
+    height: calc(100vh - 3.7rem) ;
+  }
