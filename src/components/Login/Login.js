@@ -19,11 +19,13 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Login({isAdmin}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
   const { setLoggedin, setUsername: setUsernameContext, setAmAdmin, setTokenContext } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsDisabled(true);
     // Handle login logic here
 
     try {
@@ -51,6 +53,7 @@ export default function Login({isAdmin}) {
           // Reset form inputs
           setUsername('');
           setPassword('');
+          setIsDisabled(false);
     
           // Redirect to previous page
           navigate('/'); // Navigate back to the previous page
@@ -77,6 +80,7 @@ export default function Login({isAdmin}) {
         // Reset form inputs
         setUsername('');
         setPassword('');
+        setIsDisabled(false);
   
         // Redirect to previous page
         navigate('/'); // Navigate back to the previous page
@@ -84,6 +88,7 @@ export default function Login({isAdmin}) {
   
       } catch (error) {
         if(error.code === 'ERR_BAD_REQUEST'){
+          setIsDisabled(false);
           toast.error('Check your login credentials!', {
             position: "top-center",
             autoClose: 5000,
@@ -96,6 +101,7 @@ export default function Login({isAdmin}) {
             transition: Bounce,
             });
         } else if(error.code === 'ERR_NETWORK') {
+          setIsDisabled(false);
           toast.warn('Check your internet connection!', {
             position: "top-center",
             autoClose: 5000,
@@ -108,6 +114,7 @@ export default function Login({isAdmin}) {
             transition: Bounce,
             });
         } else {
+          setIsDisabled(false);
           toast.error(`Some error occured. Can't login.`, {
             position: "top-center",
             autoClose: 5000,
@@ -156,6 +163,7 @@ export default function Login({isAdmin}) {
                     placeholder="Enter username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                    disabled={isDisabled}
                   />
                   <TextField
                     fullWidth
@@ -167,6 +175,7 @@ export default function Login({isAdmin}) {
                     value={password}
                     sx={{mt:"1.5rem"}}
                     onChange={(e) => setPassword(e.target.value)}
+                    disabled={isDisabled}
                   />
                   <Button
                     type="submit"
@@ -174,6 +183,7 @@ export default function Login({isAdmin}) {
                     color="primary"
                     fullWidth
                     sx={{mt:"2rem"}}
+                    disabled={isDisabled}
                   >
                     Login
                   </Button>
